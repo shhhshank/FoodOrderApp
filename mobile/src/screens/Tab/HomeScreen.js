@@ -50,15 +50,68 @@ const categories = [
     }
 ]
 
-const HomeScreen = () => {
+const foods = [
+    {
+        id: "1",
+        image: require("../../../assets/foods/pizza/classic-cheese.jpg"),
+        name: "Classic Cheese",
+        rating: "4.5",
+        description: "Simple and all time favorite classic cheese pizza, made with high quality cheese and tossed at fire owen",
+        deliveryTime: "30 min",
+        price: "299",
+        isFavorite: false,
+        quantity: 0
+    },
+    {
+        id: "2",
+        image: require("../../../assets/foods/pizza/classic-cheese.jpg"),
+        name: "Classic Cheese",
+        rating: "4.5",
+        description: "Simple and all time favorite classic cheese pizza, made with high quality cheese and tossed at fire owen",
+        deliveryTime: "30 min",
+        price: "299",
+        isFavorite: false,
+        quantity: 0
+    },
+    {
+        id: "3",
+        image: require("../../../assets/foods/pizza/classic-cheese.jpg"),
+        name: "Classic Cheese",
+        rating: "4.5",
+        description: "Simple and all time favorite classic cheese pizza, made with high quality cheese and tossed at fire owen",
+        deliveryTime: "30 min",
+        price: "299",
+        isFavorite: false,
+        quantity: 0
+    }
+]
+
+const HomeScreen = ({ navigation }) => {
 
     const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0)
 
-    const FoodItem = ({ }) => {
+    const FoodItem = ({ id, image, name, rating, description, deliveryTime, price, isFavorite, quantity }) => {
+        const onFoodPressed = () => {
+            navigation.navigate('food', { id, image, name, rating, description, deliveryTime, price, isFavorite, quantity })
+        }
         return (
-            <View>
+            <TouchableOpacity onPress={onFoodPressed} activeOpacity={0.8} style={styles.foodItemContainer}>
+                <View style={styles.foodItemInfoContainer}>
+                    <Image source={image} style={styles.foodItemImage} resizeMode='cover' />
+                    <View style={[styles.rowBetween, { marginBottom: 4 }]}>
+                        <Text style={styles.foodItemName}>{name}</Text>
+                        <Ionicons name='add-circle' color={Colors.PRIMARY} size={21} />
+                    </View>
+                    <View style={styles.rowBetween}>
+                        <Text style={styles.foodItemPrice}>₹ {price}</Text>
+                        <View style={styles.rowBetween}>
+                            <Ionicons name='star' color={'#ffbf00'} size={21} />
+                            <Text style={styles.foodItemRating}>{rating}</Text>
+                        </View>
+                    </View>
 
-            </View>
+                </View>
+            </TouchableOpacity>
         )
     }
 
@@ -84,7 +137,7 @@ const HomeScreen = () => {
                 </TouchableOpacity>
             </View>
 
-            {/* <BannerSlider images={images} /> */}
+            <BannerSlider images={images} />
 
             <View style={styles.rowContainer}>
                 <View style={styles.rowTitleContainer}>
@@ -93,6 +146,16 @@ const HomeScreen = () => {
 
                 <FlatList showsHorizontalScrollIndicator={false} ItemSeparatorComponent={() => (<View style={{ width: 10 }} />)} horizontal data={categories} renderItem={({ item, index }) => (
                     <ChipItem key={index.toString()} {...item} index={index} />
+                )} />
+            </View>
+
+            <View style={styles.rowContainer}>
+                <View style={styles.rowTitleContainer}>
+                    <Text style={styles.titleText}>Top Picks</Text>
+                </View>
+
+                <FlatList showsHorizontalScrollIndicator={false} ItemSeparatorComponent={() => (<View style={{ width: 10 }} />)} horizontal data={foods} renderItem={({ item, index }) => (
+                    <FoodItem key={index.toString()} {...item} index={index} />
                 )} />
             </View>
 
@@ -166,5 +229,40 @@ const styles = StyleSheet.create({
     },
     categoryText: {
         fontSize: 16
+    },
+    foodItemContainer: {
+        width: 190,
+        aspectRatio: 1,
+        backgroundColor: '#dcdcdc',
+        borderRadius: 10,
+
+    },
+    foodItemInfoContainer: {
+        flex: 1,
+        padding: 10
+    },
+    foodItemImage: {
+        height: "60%",
+        width: "100%",
+        borderRadius: 5,
+        marginBottom: 8
+    },
+    foodItemName: {
+        fontWeight: "bold",
+        fontSize: 16
+    },
+    foodItemPrice: {
+        fontWeight: 'bold',
+        fontSize: 21,
+        color: Colors.PRIMARY
+    },
+    foodItemRating: {
+        fontWeight: '700',
+        color: Colors.DARK
+    },
+    rowBetween: {
+        justifyContent: "space-between",
+        flexDirection: 'row',
+        alignItems: "center"
     }
 })

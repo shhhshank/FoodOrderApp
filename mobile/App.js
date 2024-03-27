@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
  * TODO:
  *  1. Add animation to slider, to show change
  *  2. Add highlights to input focus
- * 
+ *  3. Make code as much as modular as possible
  * 
  * 
  */
