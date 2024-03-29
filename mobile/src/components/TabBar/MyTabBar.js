@@ -66,7 +66,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 11,
     paddingVertical: 6,
     backgroundColor: '#ffffff',
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
+    borderTopWidth: 1,
+    borderTopColor: Colors.GREY
   },
   labelText: {
     marginStart: 4,

@@ -6,6 +6,8 @@ import Colors from '../../constants/Colors'
 import BannerSlider from '../../components/BannerSlider/BannerSlider'
 import Slider from '../../components/SliderDot/Slider'
 
+import foods from '../../constants/Food'
+
 const images = [
     require('../../../assets/banner1.jpg'),
     require('../../../assets/banner1.jpg'),
@@ -50,49 +52,17 @@ const categories = [
     }
 ]
 
-const foods = [
-    {
-        id: "1",
-        image: require("../../../assets/foods/pizza/classic-cheese.jpg"),
-        name: "Classic Cheese",
-        rating: "4.5",
-        description: "Simple and all time favorite classic cheese pizza, made with high quality cheese and tossed at fire owen",
-        deliveryTime: "30 min",
-        price: "299",
-        isFavorite: false,
-        quantity: 0
-    },
-    {
-        id: "2",
-        image: require("../../../assets/foods/pizza/classic-cheese.jpg"),
-        name: "Classic Cheese",
-        rating: "4.5",
-        description: "Simple and all time favorite classic cheese pizza, made with high quality cheese and tossed at fire owen",
-        deliveryTime: "30 min",
-        price: "299",
-        isFavorite: false,
-        quantity: 0
-    },
-    {
-        id: "3",
-        image: require("../../../assets/foods/pizza/classic-cheese.jpg"),
-        name: "Classic Cheese",
-        rating: "4.5",
-        description: "Simple and all time favorite classic cheese pizza, made with high quality cheese and tossed at fire owen",
-        deliveryTime: "30 min",
-        price: "299",
-        isFavorite: false,
-        quantity: 0
-    }
-]
 
+
+
+foods
 const HomeScreen = ({ navigation }) => {
 
     const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0)
 
-    const FoodItem = ({ id, image, name, rating, description, deliveryTime, price, isFavorite, quantity }) => {
+    const FoodItem = ({ id, image, name, rating, description, deliveryTime, type, price, isFavorite, quantity }) => {
         const onFoodPressed = () => {
-            navigation.navigate('food', { id, image, name, rating, description, deliveryTime, price, isFavorite, quantity })
+            navigation.navigate('food', { id, image, name, rating, description, deliveryTime, type, price, isFavorite, quantity })
         }
         return (
             <TouchableOpacity onPress={onFoodPressed} activeOpacity={0.8} style={styles.foodItemContainer}>
@@ -168,11 +138,12 @@ export default HomeScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20
+        padding: 20,
+        backgroundColor: "white"
     },
     searchInputContainer: {
         width: '85%',
-        backgroundColor: "#dfdfdf",
+        backgroundColor: Colors.GREY,
         height: 50,
         borderRadius: 10,
         paddingHorizontal: 11,
@@ -233,7 +204,7 @@ const styles = StyleSheet.create({
     foodItemContainer: {
         width: 190,
         aspectRatio: 1,
-        backgroundColor: '#dcdcdc',
+        backgroundColor: Colors.GREY,
         borderRadius: 10,
 
     },

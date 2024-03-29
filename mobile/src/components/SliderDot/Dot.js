@@ -22,7 +22,7 @@ const Dot = ({ active }) => {
             width: width.value,
             height: size,
             borderRadius: active ? activeSize / 2 : size / 2,
-            backgroundColor: active ? Colors.PRIMARY : '#C1C1C1',
+            backgroundColor: active ? Colors.PRIMARY : Colors.GREY,
             marginHorizontal: 5,
         };
     });

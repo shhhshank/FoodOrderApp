@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import Colors from '../../constants/Colors'
 
 const FoodItemScreen = ({ route }) => {
-    const { id, image, name, rating, description, deliveryTime, price, isFavorite, quantity } = route.params
+    const { id, image, name, rating, description, deliveryTime, type, price, isFavorite, quantity } = route.params
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -22,13 +22,43 @@ const FoodItemScreen = ({ route }) => {
                     <Image source={image} style={styles.image} />
                 </View>
 
-                <View style={styles.rowBetween}>
+                <View style={[styles.rowBetween, { marginBottom: 18 }]}>
                     <Text style={styles.nameText}>{name}</Text>
                     <View style={styles.quantityControlContainer}>
                         <Ionicons name='remove-outline' color={Colors.LIGHT} size={21} />
                         <Text style={styles.quantityText}>{quantity}</Text>
                         <Ionicons name='add-outline' color={Colors.LIGHT} size={21} />
                     </View>
+                </View>
+
+                <View style={styles.descriptionContainer}>
+                    <Text style={styles.descTitle}>Description</Text>
+                    <Text style={styles.desc}>{description}</Text>
+                </View>
+
+                <View style={styles.rowEvenly}>
+                    <View style={styles.infoContainer}>
+                        <Text style={styles.infoTitle}>Delivery</Text>
+                        <Text style={styles.infoText}>{deliveryTime}</Text>
+                    </View>
+                    <View style={styles.infoContainer}>
+                        <Text style={styles.infoTitle}>Type</Text>
+                        <Text style={styles.infoText}>{type}</Text>
+                    </View>
+                    <View style={styles.infoContainer}>
+                        <Text style={styles.infoTitle}>Rating</Text>
+                        <View style={styles.row}>
+                            <Ionicons name='star' color={'#ffbf00'} size={21} />
+                            <Text>{rating}</Text>
+                        </View>
+                    </View>
+                </View>
+
+                <View style={[styles.rowBetween, styles.addToCartContainer]}>
+                    <Text style={styles.priceText}>₹ {price}</Text>
+                    <TouchableOpacity activeOpacity={0.8} style={styles.addToCartButton}>
+                        <Text>Add to cart</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -53,7 +83,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.7,
         borderRadius: 999,
         padding: 5,
-        borderColor: '#acacac'
+        borderColor: Colors.GREY
     },
     contentContainer: {
         flex: 1,
@@ -69,7 +99,8 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderRadius: 999,
         padding: 10,
-        borderColor: Colors.PRIMARY
+        borderColor: Colors.PRIMARY,
+        marginBottom: 21
     },
     rowBetween: {
         justifyContent: "space-between",
@@ -93,6 +124,63 @@ const styles = StyleSheet.create({
     },
     nameText: {
         fontWeight: 'bold',
+        fontSize: 21
+    },
+    descTitle: {
+        fontWeight: 'bold',
+        fontSize: 19,
+        marginBottom: 8
+    },
+    descriptionContainer: {
+        flex: 1,
+        alignSelf: 'flex-start'
+    },
+    desc: {
+        color: '#8c8c8c',
+        fontSize: 17
+    },
+    rowEvenly: {
+        width: "100%",
+        justifyContent: "space-evenly",
+        flexDirection: "row"
+    },
+    infoContainer: {
+        height: 80,
+        width: 100,
+        backgroundColor: Colors.GREY,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 10
+    },
+    infoTitle: {
+        fontSize: 17,
+        fontWeight: "bold"
+    },
+    infoText: {
+        fontSize: 15,
+        fontWeight: '400'
+    },
+    row: {
+        flexDirection: "row",
+    },
+    addToCartContainer: {
+        width: "100%",
+        height: 60,
+        backgroundColor: Colors.PRIMARY,
+        borderRadius: 999,
+        paddingHorizontal: 15,
+        marginVertical: 15
+    },
+    addToCartButton: {
+        backgroundColor: "white",
+        height: 40,
+        width: 80,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 999
+    },
+    priceText: {
+        color: Colors.LIGHT,
         fontSize: 21
     }
 })
